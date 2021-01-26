@@ -1,0 +1,74 @@
+{% extends 'Adress/base.html' %} {% block content %}
+
+<title>Cadastro de Endereços</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+
+<div class="jumbotron header text-center">
+    <h1>E-Soft Cadastro</h1>
+    <p>Cadastre seu endereço!</p>
+</div>
+<div class="text-right mr-4">
+    <a href="/logout/">Sair</a>
+</div>
+<div id="menu">
+    <ul class="nav ml-2">
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/cadastro/novo">Cadastrar</a>
+        </li>
+    </ul>
+</div>
+<br>
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col">Cep</th>
+            <th scope="col">Endereço</th>
+            <th scope="col">Bairro</th>
+            <th scope="col">Cidade</th>
+            <th scope="col">Estado</th>
+        </tr>
+    </thead>
+    <tbody>
+
+
+        {% if adress_list %} {% for a in adress_list %}
+        <tr>
+            <td>
+                {{a.cep}}
+            </td>
+            <td>
+                {{a.endereco}}
+            </td>
+            <td>
+                {{a.bairro}}
+            </td>
+            <td>
+                {{a.cidade}}
+            </td>
+            <td>
+                {{a.UF}}
+            </td>
+        </tr>
+
+        {% endfor %} {% endif %}
+
+
+
+    </tbody>
+</table>
+
+<div class="jumbotron footer text-center" style="margin-bottom:0; 
+                                                 background-color: #009933; 
+                                                 color: white">
+    <p>Cadastro de endereços</p>
+    <p>Matheusinho Pinguim</p>
+</div>
+
+{% endblock content %}

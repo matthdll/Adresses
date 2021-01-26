@@ -1,0 +1,23 @@
+.boxCadastro {
+    background: #E8E8E8
+}
+
+#menu a {
+    color: #FFF;
+    background-color: #252525;
+    text-decoration: none;
+    border-bottom: transparent solid 1px;
+    padding-bottom: 5px;
+}
+
+#menu a:hover {
+    color: #FFF;
+    background-color: #252525;
+    border-bottom: #00ff00 solid 1px;
+}
+
+.jumbotron.header {
+    background-color: green;
+    color: white;
+    background-image: linear-gradient(green, #003300);
+}

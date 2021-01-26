@@ -1,0 +1,67 @@
+{% extends 'Adress/base.html' %} {% load crispy_forms_tags %} {% block content %}
+<form method="post" action="">
+    {% csrf_token %}
+
+    <div class="container">
+        <div class="col-md-10 offset-md-1 mt-5 px-3 boxCadastro">
+            <h1 class="display-4"> Cadastro </h1>
+            {{form|crispy}}
+            <div class="col-12">
+                <button type="submit" class="btn btn-primary mt-4">Cadastre-se</button>
+            </div>
+        </div>
+    </div>
+</form>
+<script>
+    async function pesquisarCep(cepRaw) {
+        const cep = cepRaw.replace(/\.|\-/g, '')
+        const dados = await axios.get(`http://127.0.0.1:8000/adress/${cep}`).then(res => res.data)
+
+        if (dados.length > 1) {
+            console.log(dados, '21')
+            if (Array.isArray(dados) && dados.length > 1) {
+                const newdados = {
+                    uf: dados[0].UF,
+                    localidade: dados[0].cidade,
+                    bairro: dados[0].bairro,
+                    logradouro: dados[0].endereco,
+                }
+                preencherCampos(newdados)
+                console.log(newdados, '29')
+
+            } else {
+                console.log(dados, '33')
+                preencherCampos(dados)
+            }
+        } else {
+            const dados = await axios.get(`http://viacep.com.br/ws/${cep}/json/`).then(res => res.data)
+            preencherCampos(dados)
+            console.log(dados, '36')
+        }
+
+        return dados
+    }
+
+    function preencherCampos(dados) {
+        const UFinput = document.getElementById('id_UF')
+        UFinput.value = dados.uf
+        const Cidadeinput = document.getElementById('id_cidade')
+        Cidadeinput.value = dados.localidade
+        const Bairroinput = document.getElementById('id_bairro')
+        Bairroinput.value = dados.bairro
+        const enderecoinput = document.getElementById('id_endereco')
+        enderecoinput.value = dados.logradouro
+
+    }
+
+    const cepinput = document.getElementById('id_cep')
+
+    cepinput.addEventListener('blur', (event) => {
+        pesquisarCep(event.target.value)
+
+    })
+</script>
+
+{% endblock content %}
+
+<!-- 81925580 -->
